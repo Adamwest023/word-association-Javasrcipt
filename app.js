@@ -90,6 +90,7 @@ function checkAnswer(option, optionIndex, correctAnswer) {
     } else {
         score--
         scoreDisplay.textContent = score; 
+        //test
     }
 
 }
