@@ -33,6 +33,7 @@ const questions = [
 
 //set and display score
 let score = 0
+let clicked = [ ]
 scoreDisplay.textContent = score
 
 //populate the quesiton
@@ -63,13 +64,18 @@ function populateQuesitons() {
             questionButton.classList.add('question-button')
             questionButton.textContent = option
 
-            questionButton.addEventListener('click', () => checkAnswer(option, optionIndex, question.correct))
+            questionButton.addEventListener('click', () => checkAnswer(questionBox,questionButton,option, optionIndex, question.correct))
 
 
             questionButtons.append(questionButton)
         })
 
+        //creating a right or wrong answer display
+        const answerDisplay = document.createElement('div')
+        answerDisplay.classList.add('answer-display');
 
+
+        questionBox.append(answerDisplay);
         questionDisplay.append(questionBox);
 
     })
@@ -80,16 +86,31 @@ populateQuesitons();
 
 
 //fucntion to checkAnswer   
-function checkAnswer(option, optionIndex, correctAnswer) {
+function checkAnswer(questionBox,questionButton,option, optionIndex, correctAnswer) {
     console.log('option', option)
     console.log('optionIndex', optionIndex)
 
     if (optionIndex == correctAnswer) {
         score++;
         scoreDisplay.textContent = score;
+        addResult(questionBox, "Correct!", 'correct');
     } else {
         score--
         scoreDisplay.textContent = score; 
+        addResult(questionBox, "Wrong!", 'wrong');
     }
 
+    clicked.push(option)
+    //if the clicked option is the same as the questionButton it will be disabled
+    questionButton.disabled = clicked.includes(option)
+
+}
+
+//function to add results to the answer display
+function addResult(questionBox,answer, className) {
+    const answerDisplay =  questionBox.querySelector('.answer-display')
+    answerDisplay.classList.remove('wrong')
+    answerDisplay.classList.remove('correct')
+    answerDisplay.classList.add(className)
+    answerDisplay.textContent = answer
 }

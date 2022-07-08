@@ -38,3 +38,20 @@
     background-color: rgb(121, 121, 121);
     color: rgb(136,134,134); 
 }
+
+.answer-display {
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.answer-display.wrong {
+    color: rgb(211, 134, 137);
+
+}
+.answer-display.correct {
+    color: rgb(211, 211, 117);
+
+}
